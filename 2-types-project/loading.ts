@@ -32,6 +32,8 @@
       case 'fail': 
         console.log(`😱 ${state.reason}`);
         break;
+      default:
+        throw new Error('found error')
     }
   }
 
