@@ -80,7 +80,7 @@
   const transaction = charge(user, subscription);
 }
 
-// Only add needed context
+// Add unneeded context
 {
   // Bad
   type Car = {
@@ -102,5 +102,62 @@
 
   function print(car: Car): void {
     console.log(`${car.make} ${car.model} (${car.color})`);
+  }
+}
+
+// Use default arguments
+{
+  // Bad
+  function loadPages(count?: number) {
+    const loadCount = count !== undefined ? count : 10;
+    // ...
+  }
+
+  // Good
+  function loadPages(count: number = 10) {
+    // ...
+  }
+
+  // Use enum to document the intent
+  {
+    // Bad
+    const GENRE = {
+      ROMANTIC: "romantic",
+      DRAMA: "drama",
+      COMEDY: "comedy",
+      DOCUMENTARY: "documentary",
+    };
+
+    projector.configureFilm(GENRE.COMEDY);
+
+    class Projector {
+      // declaration of Projector
+      configureFilm(genre) {
+        switch (genre) {
+          case GENRE.ROMANTIC:
+          // some logic to be executed
+        }
+      }
+    }
+
+    // Good
+    enum GENRE {
+      ROMANTIC,
+      DRAMA,
+      COMEDY,
+      DOCUMENTARY,
+    }
+
+    projector.configureFilm(GENRE.COMEDY);
+
+    class Projector {
+      // declaration of Projector
+      configureFilm(genre) {
+        switch (genre) {
+          case GENRE.ROMANTIC:
+          // some logic to be executed
+        }
+      }
+    }
   }
 }
