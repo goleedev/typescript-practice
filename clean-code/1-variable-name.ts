@@ -160,4 +160,39 @@
       }
     }
   }
+
+  {
+    // Function arguments (2 or fewer ideally)
+
+    // Bad {
+    function createMenu(
+      title: string,
+      body: string,
+      buttonText: string,
+      cancellable: boolean
+    ) {
+      // ...
+    }
+
+    createMenu("Foo", "Bar", "Baz", true);
+
+    // Good
+    {
+      function createMenu(options: {
+        title: string;
+        body: string;
+        buttonText: string;
+        cancellable: boolean;
+      }) {
+        // ...
+      }
+
+      createMenu({
+        title: "Foo",
+        body: "Bar",
+        buttonText: "Baz",
+        cancellable: true,
+      });
+    }
+  }
 }
